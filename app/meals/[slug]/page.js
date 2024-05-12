@@ -5,25 +5,24 @@ import styles from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 
 export async function generateMetadata({ params }) {
-	const id = params.slug;
+	const meal = await getMeal(params.slug);
 
-	const meal = await getMeal(id);
 	if (!meal) {
-		notFound()
-	} else {
-		return {
-			title: meal.title,
-			description: meal.summary,
-			openGraph: {
-				images: [meal.image],
-			},
-		};
+		notFound();
 	}
+
+	return {
+		title: meal.title,
+		description: meal.summary,
+		openGraph: {
+			images: [meal.image],
+		},
+	};
 }
 const MealDetailPage = ({ params }) => {
 	const meal = getMeal(params.slug);
-	if(!meal) {
-		notFound()
+	if (!meal) {
+		notFound();
 	}
 	meal.instructions = meal.instructions.replace(/\n/g, "<br/>");
 	return (

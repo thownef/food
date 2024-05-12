@@ -22,8 +22,7 @@ const ImagePicker = ({ label, name }) => {
 		fileReader.onload = () => {
 			setPickedImage(fileReader.result);
 		};
-		console.log(fileReader);
-		fileReader.readAsDataURL(file)
+		fileReader.readAsDataURL(file);
 	};
 	return (
 		<div className={styles.picker}>
@@ -41,7 +40,6 @@ const ImagePicker = ({ label, name }) => {
 					type="file"
 					id={name}
 					accept="image/png, image/jpeg, image/jpg"
-					required
 				/>
 				<button onClick={handlePickClick} className={styles.button} type="button">
 					Pick an Image
